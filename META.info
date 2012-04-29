@@ -1,0 +1,8 @@
+{
+    "name" : "Signal",
+    "version" : "0.0.1",
+    "description" : "Signal/Slot akin to Qt's",
+    "author" : "Wenzel P. P. Peppmeyer",
+    "depends" : [ ],
+    "source-url" : "git://github.com/gfldex/.git"
+}
