@@ -32,7 +32,7 @@ role Signal {
 	}
 }
 
-multi trait_mod:<is>(Routine $_signal, :$signal!){
+multi trait_mod:<is>(Routine $_signal, :$signal!) is export {
 	$_signal does Signal;
 	
 	$_signal.slots; # WORKAROUND RT112666
@@ -64,34 +64,34 @@ multi trait_mod:<is>(Routine $_signal, :$signal!){
 	$_signal.wrap(&call_handler);
 }
 
-multi sub connect(Any:D $sender, Method $signal, Any:D $rcpt, Method $slot){
+multi sub connect(Any:D $sender, Method $signal, Any:D $rcpt, Method $slot) is export {
 	$signal.connect($sender, $rcpt, $slot);
 }
 
-multi sub connect(Signal $signal, Any:D $rcpt, Method $slot){
+multi sub connect(Signal $signal, Any:D $rcpt, Method $slot) is export {
 	$signal.connect($rcpt, $slot);
 }
 
-multi sub connect(Any:D $sender, Method $signal, Routine $slot){
+multi sub connect(Any:D $sender, Method $signal, Routine $slot) is export {
 	$signal.connect($sender, $signal, $slot);
 }
 
-multi sub connect(Routine $signal, Routine $slot){
+multi sub connect(Routine $signal, Routine $slot) is export {
 	$signal.connect($slot);
 }
 
-multi disconnect(Any:D $sender, Method $signal, Any:D $receiver, Method $slot){
+multi disconnect(Any:D $sender, Method $signal, Any:D $receiver, Method $slot) is export {
 	$signal.disconnect($sender, $receiver, $slot);
 }
 
-multi disconnect(Signal $signal, Any:D $receiver, Method $slot){
+multi disconnect(Signal $signal, Any:D $receiver, Method $slot) is export {
 	$signal.disconnect(Mu, $receiver, $slot);
 }
 
-multi disconnect(Any:D $sender, Method $signal, Routine $slot){
+multi disconnect(Any:D $sender, Method $signal, Routine $slot) is export {
 	$signal.disconnect($sender, Mu, $slot);
 }
 
-multi disconnect(Routine $signal, Routine $slot){
+multi disconnect(Routine $signal, Routine $slot) is export {
 	$signal.disconnect(Mu, Mu, $slot);
 }
