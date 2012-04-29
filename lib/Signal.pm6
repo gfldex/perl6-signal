@@ -1,6 +1,6 @@
 use v6;
 
-role Signal {
+role Signal is export {
 	has @.slots; # a nice list of callbacks (that are methods)
 
 	multi method connect(Any:D $sender, Any:D $rcpt, Method $method){
