@@ -101,3 +101,5 @@ my $c = C.new;
 connect($a, &A::sig5, $b, &B::slot5);
 connect($a, &A::sig5, $c, &C::slot6);
 say $a.sig5(11).perl;
+
+# say Signal::<&test>();

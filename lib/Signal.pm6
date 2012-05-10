@@ -1,5 +1,7 @@
 use v6;
 
+module Signal;
+
 role Signal is export {
   has @.slots; # a nice list of callbacks (that are methods)
 
@@ -108,11 +110,11 @@ multi disconnect(Routine $signal, Routine $slot) is export {
 sub test () {
   my @results;
 
-  class A() {
-    method sig1 is signal (Int $i) {...}
-  };
+  my class A {
+    method sig1 (Int $i) is signal {...}
+  }
 
-  class B() { 
+  my class B {
     method slot1 (Int $i) { 2*$i }
   }
 
@@ -121,6 +123,8 @@ sub test () {
 
   connect($a, &A::sig1, $b, &B::sig1);
 
-  @results.push True if $a.sig1.is_connected($b, &B::sig1);
-  @results.push True if $a.sig1(5) == 10;
+  @results.push(True) if $a.sig1.is_connected($b, &B::sig1);
+  @results.push(True) if $a.sig1(5) == 10;
+
+  return @results;
 }
